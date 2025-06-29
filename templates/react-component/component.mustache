@@ -1,0 +1,71 @@
+import React{{#useState}}, { useState }{{/useState}}{{#useEffect}}, { useEffect }{{/useEffect}} from 'react';
+{{#css}}
+import styles from './{{componentName}}.module.css';
+{{/css}}
+
+/**
+ * {{componentName}} - {{description}}
+ * 
+ * @created {{helpers.currentTime}}
+ */
+const {{componentName}} = ({{#props}}{
+  {{#.}}
+  {{name}},
+  {{/.}}
+}{{/props}}{{^props}}props{{/props}}) => {
+  {{#useState}}
+  const [state, setState] = useState(null);
+  {{/useState}}
+
+  {{#useEffect}}
+  useEffect(() => {
+    // TODO: 副作用逻辑
+    return () => {
+      // TODO: 清理逻辑
+    };
+  }, []);
+  {{/useEffect}}
+
+  {{#props}}
+  {{#.}}
+  // {{name}}: {{description}}
+  {{/.}}
+  {{/props}}
+
+  return (
+    <div{{#css}} className={styles.container}{{/css}}>
+      <h1{{#css}} className={styles.title}{{/css}}>{{componentName}}</h1>
+      <p{{#css}} className={styles.description}{{/css}}>
+        {{description}}
+      </p>
+      {{#props}}
+      {{#.}}
+      <div{{#css}} className={styles.prop}{{/css}}>
+        <strong>{{name}}:</strong> {{{name}}}
+      </div>
+      {{/.}}
+      {{/props}}
+      {{^props}}
+      <div{{#css}} className={styles.content}{{/css}}>
+        {/* TODO: 组件内容 */}
+      </div>
+      {{/props}}
+    </div>
+  );
+};
+
+{{#props}}
+{{componentName}}.propTypes = {
+  {{#.}}
+  {{name}}: PropTypes.{{type}},
+  {{/.}}
+};
+
+{{componentName}}.defaultProps = {
+  {{#.}}
+  {{name}}: {{#defaultValue}}{{defaultValue}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}},
+  {{/.}}
+};
+{{/props}}
+
+export default {{componentName}}; 

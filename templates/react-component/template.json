@@ -1,0 +1,37 @@
+{
+  "name": "react-component",
+  "description": "React函数组件模板（包含组件、样式和测试文件）",
+  "type": "multi-file",
+  "author": "MCP Generator",
+  "version": "1.0.0",
+  "required": [
+    "componentName"
+  ],
+  "defaults": {
+    "description": "React组件",
+    "useHooks": true,
+    "useState": false,
+    "useEffect": false,
+    "props": [],
+    "css": true,
+    "test": true
+  },
+  "files": [
+    {
+      "name": "{{componentName}}.jsx",
+      "template": "component.mustache"
+    },
+    {
+      "name": "{{componentName}}.module.css",
+      "template": "styles.mustache"
+    },
+    {
+      "name": "{{componentName}}.test.js",
+      "template": "test.mustache"
+    },
+    {
+      "name": "index.js",
+      "template": "index.mustache"
+    }
+  ]
+} 

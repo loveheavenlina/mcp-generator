@@ -1,0 +1,35 @@
+{
+  "name": "js-class",
+  "description": "JavaScript ES6类模板",
+  "type": "single-file",
+  "author": "MCP Generator",
+  "version": "1.0.0",
+  "file": "template.mustache",
+  "required": [
+    "className"
+  ],
+  "defaults": {
+    "description": "一个新的JavaScript类",
+    "author": "Unknown",
+    "extends": "",
+    "constructor": true,
+    "methods": []
+  },
+  "examples": [
+    {
+      "name": "基本类",
+      "data": {
+        "className": "MyClass",
+        "description": "我的第一个类"
+      }
+    },
+    {
+      "name": "带继承的类",
+      "data": {
+        "className": "ChildClass",
+        "description": "继承的子类",
+        "extends": "ParentClass"
+      }
+    }
+  ]
+} 

@@ -1,0 +1,48 @@
+/**
+ * {{className}} - {{description}}
+ * 
+ * @author {{author}}
+ * @created {{helpers.currentTime}}
+ */
+
+{{#extends}}
+class {{className}} extends {{extends}} {
+{{/extends}}
+{{^extends}}
+class {{className}} {
+{{/extends}}
+  {{#constructor}}
+  /**
+   * 构造函数
+   */
+  constructor() {
+    {{#extends}}
+    super();
+    {{/extends}}
+    // TODO: 初始化代码
+  }
+  {{/constructor}}
+
+  {{#methods}}
+  /**
+   * {{description}}
+   * @param {...} params - 参数
+   * @returns {...} 返回值
+   */
+  {{name}}() {
+    // TODO: 实现方法逻辑
+  }
+
+  {{/methods}}
+  {{^methods}}
+  /**
+   * 示例方法
+   * @returns {string} 返回示例字符串
+   */
+  hello() {
+    return `Hello from ${this.constructor.name}!`;
+  }
+  {{/methods}}
+}
+
+module.exports = {{className}}; 

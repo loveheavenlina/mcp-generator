@@ -1,0 +1,98 @@
+/**
+ * {{routeName}} 路由
+ * {{description}}
+ * 
+ * @created {{helpers.currentTime}}
+ */
+
+const express = require('express');
+const router = express.Router();
+
+{{#middleware}}
+// 应用中间件: {{.}}
+router.use({{.}});
+{{/middleware}}
+
+{{#routes}}
+/**
+ * {{description}}
+ * {{method}} {{basePath}}{{path}}
+ */
+router.{{helpers.lowerCase method}}('{{path}}', async (req, res) => {
+  try {
+    {{#handler}}
+    const result = await {{routeName}}Controller.{{handler}}(req, res);
+    res.json({
+      success: true,
+      data: result,
+      message: '{{description}}成功'
+    });
+    {{/handler}}
+    {{^handler}}
+    // TODO: 实现{{description}}逻辑
+    res.json({
+      success: true,
+      message: '{{description}}成功'
+    });
+    {{/handler}}
+  } catch (error) {
+    console.error('{{description}}失败:', error);
+    res.status(500).json({
+      success: false,
+      message: '{{description}}失败',
+      error: error.message
+    });
+  }
+});
+
+{{/routes}}
+
+{{^routes}}
+/**
+ * 获取{{routeName}}列表
+ * GET {{basePath}}/
+ */
+router.get('/', async (req, res) => {
+  try {
+    // TODO: 实现获取列表逻辑
+    const result = [];
+    res.json({
+      success: true,
+      data: result,
+      message: '获取列表成功'
+    });
+  } catch (error) {
+    console.error('获取列表失败:', error);
+    res.status(500).json({
+      success: false,
+      message: '获取列表失败',
+      error: error.message
+    });
+  }
+});
+
+/**
+ * 创建{{routeName}}
+ * POST {{basePath}}/
+ */
+router.post('/', async (req, res) => {
+  try {
+    // TODO: 实现创建逻辑
+    const result = req.body;
+    res.json({
+      success: true,
+      data: result,
+      message: '创建成功'
+    });
+  } catch (error) {
+    console.error('创建失败:', error);
+    res.status(500).json({
+      success: false,
+      message: '创建失败',
+      error: error.message
+    });
+  }
+});
+{{/routes}}
+
+module.exports = router; 

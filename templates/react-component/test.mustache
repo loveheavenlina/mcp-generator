@@ -1,0 +1,43 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import {{componentName}} from './{{componentName}}';
+
+/**
+ * {{componentName}} 组件测试
+ * 创建时间: {{helpers.currentTime}}
+ */
+
+describe('{{componentName}}', () => {
+  test('renders without crashing', () => {
+    render(<{{componentName}} />);
+    expect(screen.getByText('{{componentName}}')).toBeInTheDocument();
+  });
+
+  test('displays description correctly', () => {
+    render(<{{componentName}} />);
+    expect(screen.getByText('{{description}}')).toBeInTheDocument();
+  });
+
+  {{#props}}
+  {{#.}}
+  test('renders {{name}} prop correctly', () => {
+    const test{{helpers.pascalCase name}} = 'test {{name}} value';
+    render(<{{componentName}} {{name}}={test{{helpers.pascalCase name}}} />);
+    expect(screen.getByText(test{{helpers.pascalCase name}})).toBeInTheDocument();
+  });
+  {{/.}}
+  {{/props}}
+
+  {{^props}}
+  test('has correct CSS class', () => {
+    const { container } = render(<{{componentName}} />);
+    expect(container.firstChild).toHaveClass('container');
+  });
+
+  test('matches snapshot', () => {
+    const { container } = render(<{{componentName}} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+  {{/props}}
+}); 

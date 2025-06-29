@@ -1,0 +1,48 @@
+{
+  "name": "express-route",
+  "description": "Express.js路由模板",
+  "type": "single-file",
+  "author": "MCP Generator",
+  "version": "1.0.0",
+  "file": "template.mustache",
+  "required": [
+    "routeName"
+  ],
+  "defaults": {
+    "description": "Express路由处理器",
+    "basePath": "/api",
+    "middleware": [],
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/",
+        "handler": "list",
+        "description": "获取列表"
+      },
+      {
+        "method": "POST",
+        "path": "/",
+        "handler": "create",
+        "description": "创建新项"
+      },
+      {
+        "method": "GET",
+        "path": "/:id",
+        "handler": "getById",
+        "description": "根据ID获取项"
+      },
+      {
+        "method": "PUT",
+        "path": "/:id",
+        "handler": "update",
+        "description": "更新项"
+      },
+      {
+        "method": "DELETE",
+        "path": "/:id",
+        "handler": "delete",
+        "description": "删除项"
+      }
+    ]
+  }
+} 
