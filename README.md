@@ -1,333 +1,301 @@
-# MCP代码生成器
+# MCP Generator
 
-🚀 一个强大的JavaScript代码生成器MCP工具，支持模板化生成各种类型的代码。
+一个强大的代码生成器工具，支持多种模板类型和MCP (Model Context Protocol) 服务。
 
 ## 功能特性
 
-- ✨ **模板化生成**: 支持自定义模板，灵活生成各种代码
-- 🎯 **多文件支持**: 支持单文件和多文件模板
-- 🛠️ **交互式界面**: 友好的命令行交互体验
-- ⚙️ **配置管理**: 灵活的配置系统
-- 📦 **内置模板**: 提供常用的代码模板
-- 🔧 **辅助函数**: 内置字符串转换等辅助功能
+### 代码生成器
+- 🎯 支持多种代码模板：JavaScript类、Express路由、React组件、Angular组件
+- 🎨 基于Mustache模板引擎的灵活模板系统  
+- 🔧 支持自定义模板和配置
+- 📁 智能文件结构生成
+- ✨ 交互式命令行界面
+
+### MCP (Model Context Protocol) 支持
+- 🌐 完整的MCP协议实现（基于JSON-RPC 2.0）
+- 🔧 MCP服务器：提供工具、资源和提示
+- 📱 MCP客户端：连接和使用MCP服务
+- 🚀 多种传输方式：内存、WebSocket、标准输入输出
+- 🛠️ 丰富的示例和工具
+- 💻 **Web客户端界面**：现代化的浏览器界面，支持实时交互
 
 ## 安装
 
 ```bash
-# 克隆项目
 git clone <repository-url>
 cd mcp-generator
-
-# 安装依赖
 npm install
-
-# 全局安装（可选）
-npm link
 ```
 
-## 快速开始
+## 代码生成器使用
 
-### 1. 交互式使用
+### 命令行使用
 
 ```bash
-# 启动交互式界面
-node src/index.js
-# 或者
-npm start
+# 查看可用模板
+node bin/mcp-gen.js list
+
+# 交互式生成
+node bin/mcp-gen.js generate
+
+# 使用指定模板生成
+node bin/mcp-gen.js generate angular-component
+
+# 指定输出目录
+node bin/mcp-gen.js generate -o ./output angular-component
 ```
 
-### 2. 命令行使用
+### 可用模板
+
+1. **JavaScript类** (`js-class`)
+   - 生成ES6类文件
+   - 支持构造函数、方法、属性
+
+2. **Express路由** (`express-route`)
+   - 生成Express.js路由文件
+   - 支持多种HTTP方法
+
+3. **React组件** (`react-component`)
+   - 生成React函数组件
+   - 包含样式文件和测试文件
+
+4. **Angular组件** (`angular-component`)
+   - 生成Angular standalone组件
+   - 包含TypeScript、HTML、CSS和测试文件
+   - 支持输入属性、输出事件、生命周期钩子
+
+## MCP Web客户端
+
+### 快速启动
 
 ```bash
-# 查看所有可用模板
-npx mcp-gen list
-
-# 生成代码
-npx mcp-gen generate js-class -d '{"className":"MyClass","description":"我的类"}'
-
-# 查看模板详情
-npx mcp-gen info js-class
-
-# 创建新模板
-npx mcp-gen create my-template -t single-file -d "我的模板"
+# 启动Web客户端（包含HTTP服务器和MCP服务器）
+npm run web
 ```
 
-## 内置模板
+在浏览器中打开 `http://localhost:3000`，点击"连接服务器"按钮连接到 `ws://localhost:8080`。
 
-### 1. JavaScript类模板 (js-class)
-生成ES6类文件，支持继承、构造函数等特性。
+### 功能特点
 
-**必需参数**: 
-- `className`: 类名
+- 🌐 **现代化Web界面** - 响应式设计，支持桌面端和移动端
+- 🔌 **实时WebSocket连接** - 低延迟的实时通信
+- 🛠️ **工具调用** - 可视化的工具执行界面
+- 📂 **资源访问** - 直观的资源浏览和读取
+- 💡 **提示模板** - 交互式提示获取和使用
+- 📝 **智能指令解析** - 支持多种指令格式
+- 📊 **实时日志** - 完整的操作历史记录
 
-**可选参数**:
-- `description`: 类描述
-- `author`: 作者
-- `extends`: 继承的父类
-- `constructor`: 是否包含构造函数
-- `methods`: 方法列表
+### 内置示例工具
 
-**使用示例**:
-```bash
-npx mcp-gen generate js-class -d '{"className":"UserService","description":"用户服务类","author":"开发者"}'
-```
+- **calculator** - 数学计算器：`calculator 2+3*4`
+- **current_time** - 时间工具：`current_time Asia/Shanghai`
+- **random_number** - 随机数生成：`random_number min=1 max=100`
+- **echo** - 文本回显：`echo text="Hello MCP!"`
 
-### 2. Express路由模板 (express-route)
-生成Express.js路由文件，包含CRUD操作。
+### 内置示例资源
 
-**必需参数**:
-- `routeName`: 路由名称
+- **system://info** - 系统信息：`resource:system://info`
+- **file://current-dir** - 当前目录：`resource:file://current-dir`
 
-**可选参数**:
-- `description`: 路由描述
-- `basePath`: 基础路径
-- `middleware`: 中间件列表
-- `routes`: 路由配置列表
+### 内置示例提示
 
-**使用示例**:
-```bash
-npx mcp-gen generate express-route -d '{"routeName":"user","description":"用户管理路由","basePath":"/api/users"}'
-```
+- **code-generator** - 代码生成：`prompt:code-generator language=JavaScript task=排序算法`
+- **problem-solver** - 问题解决：`prompt:problem-solver problem=性能优化`
 
-### 3. React组件模板 (react-component)
-生成React函数组件，包含组件文件、样式文件、测试文件等。
+## MCP 命令行使用
 
-**必需参数**:
-- `componentName`: 组件名称
-
-**可选参数**:
-- `description`: 组件描述
-- `useHooks`: 是否使用Hooks
-- `useState`: 是否使用useState
-- `useEffect`: 是否使用useEffect
-- `props`: 属性列表
-- `css`: 是否包含样式文件
-- `test`: 是否包含测试文件
-
-**使用示例**:
-```bash
-npx mcp-gen generate react-component -d '{"componentName":"Button","description":"按钮组件"}' -o ./components/Button
-```
-
-## 配置
-
-### 全局配置文件位置
-配置文件位于: `~/.mcp-generator/config.json`
-
-### 默认配置
-```json
-{
-  "outputDir": "./generated",
-  "templateDir": "./templates",
-  "author": "系统用户名",
-  "encoding": "utf8",
-  "overwrite": false,
-  "backup": true,
-  "prettify": true,
-  "log": {
-    "level": "info",
-    "timestamp": true
-  },
-  "templates": {
-    "defaultExtension": ".js",
-    "defaultEncoding": "utf8"
-  }
-}
-```
-
-### 修改配置
-```bash
-# 查看当前配置
-npx mcp-gen config
-
-# 修改配置项
-npx mcp-gen config --set author=YourName
-npx mcp-gen config --set outputDir=./my-output
-```
-
-## 创建自定义模板
-
-### 1. 单文件模板结构
-```
-templates/
-  my-template/
-    template.json      # 模板配置文件
-    template.mustache  # 模板文件
-```
-
-### 2. 多文件模板结构
-```
-templates/
-  my-multi-template/
-    template.json      # 模板配置文件
-    file1.mustache     # 模板文件1
-    file2.mustache     # 模板文件2
-```
-
-### 3. 模板配置示例 (template.json)
-```json
-{
-  "name": "my-template",
-  "description": "我的自定义模板",
-  "type": "single-file",
-  "author": "作者名",
-  "version": "1.0.0",
-  "file": "template.mustache",
-  "required": ["name"],
-  "defaults": {
-    "description": "默认描述",
-    "author": "默认作者"
-  }
-}
-```
-
-### 4. 模板语法
-使用 [Mustache](https://mustache.github.io/) 模板引擎语法:
-
-```mustache
-/**
- * {{name}} - {{description}}
- * @author {{author}}
- * @created {{helpers.currentTime}}
- */
-
-{{#isClass}}
-class {{helpers.pascalCase name}} {
-{{/isClass}}
-{{^isClass}}
-function {{helpers.camelCase name}}() {
-{{/isClass}}
-  // TODO: 实现代码
-}
-```
-
-### 5. 内置辅助函数
-- `helpers.camelCase`: 转换为驼峰命名
-- `helpers.pascalCase`: 转换为帕斯卡命名
-- `helpers.kebabCase`: 转换为短横线命名
-- `helpers.snakeCase`: 转换为下划线命名
-- `helpers.upperCase`: 转换为大写
-- `helpers.lowerCase`: 转换为小写
-- `helpers.currentDate`: 当前日期
-- `helpers.currentTime`: 当前时间
-- `helpers.timestamp`: 时间戳
-
-## API 使用
+### 基本示例
 
 ```javascript
-const MCPGenerator = require('./src/index');
+const MCP = require('./src/mcp');
 
-async function example() {
-  const generator = new MCPGenerator();
-  await generator.init();
-  
-  // 生成代码
-  const result = await generator.generate('js-class', {
-    className: 'MyClass',
-    description: '我的类'
-  }, './output/MyClass.js');
-  
-  console.log('生成成功:', result);
-}
+// 创建MCP服务器
+const server = MCP.createServer({
+  name: '我的MCP服务器',
+  version: '1.0.0'
+});
+
+// 注册工具
+server.registerTool(
+  'calculator',
+  '执行数学计算',
+  {
+    type: 'object',
+    properties: {
+      expression: {
+        type: 'string',
+        description: '数学表达式'
+      }
+    },
+    required: ['expression']
+  },
+  async (args) => {
+    return `结果: ${eval(args.expression)}`;
+  }
+);
+
+// 创建客户端
+const client = MCP.createClient({
+  name: '我的MCP客户端',
+  version: '1.0.0'
+});
+
+// 使用内存传输连接
+const serverTransport = MCP.createMemoryTransport();
+const clientTransport = MCP.createMemoryTransport();
+const connector = MCP.createTransportConnector(serverTransport, clientTransport);
+
+// 启动和连接
+server.start();
+connector.connect(server, client);
+await client.initialize();
+
+// 调用工具
+const result = await client.callTool('calculator', { expression: '2 + 3' });
+console.log(result.content[0].text); // 输出: 结果: 5
+```
+
+### WebSocket示例
+
+#### 启动WebSocket服务器
+```bash
+node examples/websocket-example.js server 8080
+```
+
+#### 连接WebSocket客户端
+```bash
+node examples/websocket-example.js client ws://localhost:8080
+```
+
+### 运行完整示例
+
+```bash
+# 运行基本示例（内存传输）
+node examples/basic-example.js
+
+# 运行WebSocket示例
+node examples/websocket-example.js server
+# 在另一个终端运行
+node examples/websocket-example.js client
+```
+
+## MCP API
+
+### 服务器 API
+
+```javascript
+const server = new MCP.MCPServer(serverInfo);
+
+// 注册工具
+server.registerTool(name, description, inputSchema, handler);
+
+// 注册资源
+server.registerResource(uri, name, description, mimeType, handler);
+
+// 注册提示
+server.registerPrompt(name, description, arguments, handler);
+
+// 设置能力
+server.setCapabilities(capabilities);
+
+// 启动服务器
+server.start();
+```
+
+### 客户端 API
+
+```javascript
+const client = new MCP.MCPClient(clientInfo);
+
+// 初始化连接
+await client.initialize();
+
+// 获取工具列表
+const tools = await client.listTools();
+
+// 调用工具
+const result = await client.callTool(name, arguments);
+
+// 获取资源列表
+const resources = await client.listResources();
+
+// 读取资源
+const contents = await client.readResource(uri);
+
+// 获取提示列表
+const prompts = await client.listPrompts();
+
+// 获取提示
+const prompt = await client.getPrompt(name, arguments);
+```
+
+### 传输层
+
+```javascript
+// 内存传输（同进程）
+const transport = MCP.createMemoryTransport();
+
+// WebSocket传输（网络）
+const transport = MCP.createWebSocketTransport(url, WebSocket);
+
+// 标准输入输出传输（命令行）
+const transport = MCP.createStdioTransport();
+
+// 传输连接器
+const connector = MCP.createTransportConnector(serverTransport, clientTransport);
+connector.connect(server, client);
 ```
 
 ## 测试
 
 ```bash
-# 运行测试
+# 运行所有测试
 npm test
 
-# 开发模式
-npm run dev
+# 运行MCP功能测试
+node test/mcp-test.js
+
+# 运行代码生成器测试
+node test/test.js
 ```
 
-## 命令行选项
+## 项目结构
 
-### 全局选项
-- `--version, -V`: 显示版本号
-- `--help, -h`: 显示帮助信息
-
-### generate 命令
-```bash
-npx mcp-gen generate <template> [options]
-```
-
-**选项**:
-- `-o, --output <path>`: 输出路径
-- `-d, --data <data>`: 模板数据(JSON格式)
-- `-f, --file <file>`: 从文件读取模板数据
-
-### list 命令
-```bash
-npx mcp-gen list
-```
-列出所有可用的模板
-
-### info 命令
-```bash
-npx mcp-gen info <template>
-```
-查看指定模板的详细信息
-
-### create 命令
-```bash
-npx mcp-gen create <name> [options]
-```
-
-**选项**:
-- `-t, --type <type>`: 模板类型 (single-file|multi-file)
-- `-d, --description <desc>`: 模板描述
-- `-a, --author <author>`: 作者名称
-
-### config 命令
-```bash
-npx mcp-gen config [options]
-```
-
-**选项**:
-- `--set <key=value>`: 设置配置项
-
-## 开发
-
-### 项目结构
 ```
 mcp-generator/
+├── bin/                    # 命令行工具
+│   └── mcp-gen.js
 ├── src/                    # 源代码
 │   ├── core/              # 核心模块
 │   │   ├── CodeGenerator.js
-│   │   ├── TemplateManager.js
-│   │   └── ConfigManager.js
+│   │   ├── ConfigManager.js
+│   │   └── TemplateManager.js
+│   ├── mcp/               # MCP实现
+│   │   ├── types.js       # 类型定义
+│   │   ├── server.js      # MCP服务器
+│   │   ├── client.js      # MCP客户端
+│   │   ├── transport.js   # 传输层
+│   │   └── index.js       # 主入口
 │   ├── ui/                # 用户界面
 │   │   └── InteractiveInterface.js
-│   └── index.js           # 主入口文件
-├── templates/             # 内置模板
-│   ├── js-class/
+│   └── index.js
+├── templates/             # 模板文件
+│   ├── angular-component/
 │   ├── express-route/
+│   ├── js-class/
 │   └── react-component/
+├── examples/              # 示例文件
+│   ├── basic-example.js
+│   └── websocket-example.js
 ├── test/                  # 测试文件
-├── bin/                   # 命令行工具
-└── package.json
+├── generated/             # 生成的代码
+└── README.md
 ```
-
-### 扩展开发
-1. 在 `src/core/` 中添加新的核心功能
-2. 在 `templates/` 中添加新的模板
-3. 在 `test/` 中添加相应的测试
-4. 更新文档
-
-## 许可证
-
-MIT License
 
 ## 贡献
 
 欢迎提交 Issue 和 Pull Request！
 
-## 更新日志
+## 许可证
 
-### v1.0.0
-- 初始版本发布
-- 支持单文件和多文件模板
-- 内置JavaScript类、Express路由、React组件模板
-- 交互式命令行界面
-- 配置管理系统 
+MIT 

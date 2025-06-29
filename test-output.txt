@@ -1,0 +1,2 @@
+Hello from MCP Server!
+这是一个测试文件。

@@ -9,7 +9,10 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "web": "node web/start.js",
+    "web-dev": "node --watch web/server.js",
+    "test-mcp": "node test/mcp-test.js"
   },
   "keywords": [
     "code-generator",
@@ -21,11 +24,12 @@
   "author": "MCP Generator",
   "license": "MIT",
   "dependencies": {
-    "commander": "^11.0.0",
-    "inquirer": "^8.2.6",
     "chalk": "^4.1.2",
+    "commander": "^11.0.0",
     "fs-extra": "^11.1.0",
-    "mustache": "^4.2.0"
+    "inquirer": "^8.2.6",
+    "mustache": "^4.2.0",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.0"
@@ -33,4 +37,4 @@
   "engines": {
     "node": ">=16.0.0"
   }
-} 
+}
