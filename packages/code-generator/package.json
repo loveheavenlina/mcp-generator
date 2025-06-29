@@ -1,0 +1,33 @@
+{
+  "name": "@mcp-generator/code-generator",
+  "version": "1.0.0",
+  "description": "JavaScript代码生成器 - 基于模板生成各种类型的代码",
+  "main": "src/index.js",
+  "bin": {
+    "mcp-gen": "bin/mcp-gen.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "example:basic": "node examples/basic-example.js",
+    "example:websocket": "node examples/websocket-example.js",
+    "test": "node ../../test/test.js"
+  },
+  "keywords": [
+    "code-generator",
+    "template",
+    "javascript",
+    "mustache",
+    "cli"
+  ],
+  "author": "MCP Generator Team",
+  "license": "MIT",
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "inquirer": "^8.2.0",
+    "chalk": "^4.1.2",
+    "commander": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

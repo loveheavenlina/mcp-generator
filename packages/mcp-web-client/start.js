@@ -5,7 +5,7 @@
  * 同时启动HTTP服务器和MCP WebSocket服务器
  */
 
-const { startServers } = require('./server');
+const { startServers } = require('./server/server');
 
 // 配置
 const WEB_PORT = process.env.WEB_PORT || 3001;  // 改为3001避免冲突

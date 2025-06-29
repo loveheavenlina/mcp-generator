@@ -1,0 +1,31 @@
+{
+  "name": "@mcp-generator/web-client",
+  "version": "1.0.0",
+  "description": "MCP协议Web客户端 - 浏览器界面与MCP服务器交互",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "node start.js",
+    "test": "node ../../test/mcp-web-test.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "websocket",
+    "web-client",
+    "browser"
+  ],
+  "author": "MCP Generator Team",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/mcp-generator.git",
+    "directory": "packages/mcp-web-client"
+  }
+} 

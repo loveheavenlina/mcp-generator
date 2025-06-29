@@ -1,40 +1,55 @@
 {
-  "name": "mcp-code-generator",
+  "name": "mcp-generator",
   "version": "1.0.0",
-  "description": "一个强大的JavaScript代码生成器MCP工具",
-  "main": "src/index.js",
-  "bin": {
-    "mcp-gen": "./bin/mcp-gen.js"
-  },
+  "description": "一个集成的开发工具集，包含JavaScript代码生成器和MCP协议Web客户端",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch src/index.js",
-    "test": "node test/test.js",
-    "web": "node web/start.js",
-    "web-dev": "node --watch web/server.js",
-    "test-mcp": "node test/mcp-test.js"
+    "start": "node packages/code-generator/src/index.js",
+    "generate": "node packages/code-generator/bin/mcp-gen.js",
+    "generate:example": "node packages/code-generator/examples/basic-example.js",
+    "web": "node packages/mcp-web-client/start.js",
+    "web:dev": "node packages/mcp-web-client/start.js",
+    "test": "npm run test:generator && npm run test:mcp",
+    "test:generator": "node test/test.js",
+    "test:mcp": "node test/mcp-test.js",
+    "test:mcp-web": "node test/mcp-web-test.js",
+    "clean": "rm -rf output/* && rm -rf packages/*/node_modules",
+    "build": "echo '构建完成 - 项目使用原生JavaScript，无需编译'",
+    "install:all": "npm install && cd packages/code-generator && npm install && cd ../mcp-web-client && npm install"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "code-generator",
     "mcp",
+    "model-context-protocol",
     "template",
-    "cli",
-    "javascript"
+    "javascript",
+    "mustache",
+    "websocket",
+    "web-client"
   ],
-  "author": "MCP Generator",
+  "author": "MCP Generator Team",
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
-    "commander": "^11.0.0",
-    "fs-extra": "^11.1.0",
-    "inquirer": "^8.2.6",
+    "commander": "^9.0.0",
+    "inquirer": "^8.2.0",
     "mustache": "^4.2.0",
-    "ws": "^8.18.3"
+    "ws": "^8.14.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.0"
+    
   },
   "engines": {
-    "node": ">=16.0.0"
-  }
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/mcp-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/mcp-generator/issues"
+  },
+  "homepage": "https://github.com/your-org/mcp-generator#readme"
 }

@@ -5,7 +5,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const MCPGenerator = require('../src/index');
+const MCPGenerator = require('../packages/code-generator/src/index');
 
 async function runTests() {
   console.log('🧪 开始测试MCP代码生成器...\n');

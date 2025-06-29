@@ -4,7 +4,7 @@
  */
 
 const assert = require('assert');
-const MCP = require('../src/mcp');
+const MCP = require('../shared/mcp');
 
 /**
  * 测试基本MCP功能

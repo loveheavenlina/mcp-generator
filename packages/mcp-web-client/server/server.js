@@ -7,8 +7,8 @@ const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
 
-// 导入MCP服务器
-const { MCPServer, WebSocketTransport } = require('../src/mcp');
+// 导入MCP服务器 - 更新路径到共享模块
+const { MCPServer, WebSocketTransport } = require('../../../shared/mcp');
 
 /**
  * MIME类型映射
@@ -36,9 +36,9 @@ function getMimeType(filePath) {
  * HTTP服务器类
  */
 class WebServer {
-    constructor(port = 3000) {
+    constructor(port = 3001) {
         this.port = port;
-        this.webRoot = __dirname;
+        this.webRoot = path.join(__dirname, '../public'); // 更新webRoot路径
         this.server = null;
     }
 
