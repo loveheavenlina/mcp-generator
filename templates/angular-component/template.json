@@ -1,0 +1,44 @@
+{
+  "name": "angular-component",
+  "description": "Angular组件模板（包含组件、模板、样式和测试文件）",
+  "type": "multi-file",
+  "author": "MCP Generator",
+  "version": "1.0.0",
+  "required": [
+    "componentName"
+  ],
+  "defaults": {
+    "description": "Angular组件",
+    "selector": "",
+    "standalone": true,
+    "inputs": [],
+    "outputs": [],
+    "imports": ["CommonModule"],
+    "lifecycle": {
+      "ngOnInit": false,
+      "ngOnDestroy": false,
+      "ngOnChanges": false
+    },
+    "styles": true,
+    "template": true,
+    "test": true
+  },
+  "files": [
+    {
+      "name": "{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}.component.ts",
+      "template": "component.mustache"
+    },
+    {
+      "name": "{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}.component.html",
+      "template": "template.mustache"
+    },
+    {
+      "name": "{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}.component.css",
+      "template": "styles.mustache"
+    },
+    {
+      "name": "{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}.component.spec.ts",
+      "template": "spec.mustache"
+    }
+  ]
+} 

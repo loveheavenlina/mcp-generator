@@ -1,0 +1,97 @@
+import { Component{{#lifecycle.ngOnInit}}, OnInit{{/lifecycle.ngOnInit}}{{#lifecycle.ngOnDestroy}}, OnDestroy{{/lifecycle.ngOnDestroy}}{{#lifecycle.ngOnChanges}}, OnChanges, SimpleChanges{{/lifecycle.ngOnChanges}}{{#inputs}}, Input{{/inputs}}{{#outputs}}, Output, EventEmitter{{/outputs}} } from '@angular/core';
+{{#standalone}}
+{{#imports}}
+import { {{.}} } from '@angular/common';
+{{/imports}}
+{{/standalone}}
+
+/**
+ * {{componentName}} - {{description}}
+ * 
+ * @created {{helpers.currentTime}}
+ */
+@Component({
+  selector: '{{#selector}}{{selector}}{{/selector}}{{^selector}}app-{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}{{/selector}}',
+  {{#standalone}}
+  standalone: true,
+  imports: [{{#imports}}{{.}}{{^last}}, {{/last}}{{/imports}}],
+  {{/standalone}}
+  {{#template}}
+  templateUrl: './{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}.component.html',
+  {{/template}}
+  {{^template}}
+  template: `
+    <div class="{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}">
+      <h1>{{componentName}}</h1>
+      <p>{{description}}</p>
+    </div>
+  `,
+  {{/template}}
+  {{#styles}}
+  styleUrls: ['./{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}}.component.css']
+  {{/styles}}
+  {{^styles}}
+  styles: [`
+    .{{#helpers.kebabCase}}{{componentName}}{{/helpers.kebabCase}} {
+      padding: 20px;
+    }
+  `]
+  {{/styles}}
+})
+export class {{componentName}}Component{{#lifecycle.ngOnInit}} implements OnInit{{/lifecycle.ngOnInit}}{{#lifecycle.ngOnDestroy}}, OnDestroy{{/lifecycle.ngOnDestroy}}{{#lifecycle.ngOnChanges}}, OnChanges{{/lifecycle.ngOnChanges}} {
+  {{#inputs}}
+  {{#.}}
+  /**
+   * {{description}}
+   */
+  @Input() {{name}}{{#type}}: {{type}}{{/type}}{{#defaultValue}} = {{defaultValue}}{{/defaultValue}};
+  {{/.}}
+  {{/inputs}}
+
+  {{#outputs}}
+  {{#.}}
+  /**
+   * {{description}}
+   */
+  @Output() {{name}} = new EventEmitter<{{#type}}{{type}}{{/type}}{{^type}}any{{/type}}>();
+  {{/.}}
+  {{/outputs}}
+
+  constructor() {
+    console.log('{{componentName}}Component constructed');
+  }
+
+  {{#lifecycle.ngOnInit}}
+  ngOnInit(): void {
+    console.log('{{componentName}}Component initialized');
+    // TODO: 初始化逻辑
+  }
+  {{/lifecycle.ngOnInit}}
+
+  {{#lifecycle.ngOnDestroy}}
+  ngOnDestroy(): void {
+    console.log('{{componentName}}Component destroyed');
+    // TODO: 清理逻辑
+  }
+  {{/lifecycle.ngOnDestroy}}
+
+  {{#lifecycle.ngOnChanges}}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('{{componentName}}Component changes:', changes);
+    // TODO: 处理输入属性变化
+  }
+  {{/lifecycle.ngOnChanges}}
+
+  {{#outputs}}
+  {{#.}}
+  /**
+   * 触发{{name}}事件
+   */
+  on{{#helpers.pascalCase}}{{name}}{{/helpers.pascalCase}}(data{{#type}}: {{type}}{{/type}}{{^type}}: any{{/type}}): void {
+    this.{{name}}.emit(data);
+  }
+  {{/.}}
+  {{/outputs}}
+
+  // TODO: 添加其他方法
+} 

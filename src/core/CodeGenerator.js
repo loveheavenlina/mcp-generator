@@ -94,15 +94,67 @@ class CodeGenerator {
     
     // 添加常用的辅助函数
     processed.helpers = {
-      camelCase: (str) => str.replace(/-([a-z])/g, (g) => g[1].toUpperCase()),
-      pascalCase: (str) => str.charAt(0).toUpperCase() + str.slice(1).replace(/-([a-z])/g, (g) => g[1].toUpperCase()),
-      kebabCase: (str) => str.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, ''),
-      snakeCase: (str) => str.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, ''),
-      upperCase: (str) => str.toUpperCase(),
-      lowerCase: (str) => str.toLowerCase(),
-      currentDate: () => new Date().toLocaleDateString('zh-CN'),
-      currentTime: () => new Date().toLocaleString('zh-CN'),
-      timestamp: () => Date.now()
+      camelCase: function() {
+        return function(text, render) {
+          const str = render(text);
+          return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+        };
+      },
+      pascalCase: function() {
+        return function(text, render) {
+          const str = render(text);
+          return str.charAt(0).toUpperCase() + str.slice(1).replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+        };
+      },
+      kebabCase: function() {
+        return function(text, render) {
+          const str = render(text);
+          return str.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
+        };
+      },
+      snakeCase: function() {
+        return function(text, render) {
+          const str = render(text);
+          return str.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
+        };
+      },
+      upperCase: function() {
+        return function(text, render) {
+          const str = render(text);
+          return str.toUpperCase();
+        };
+      },
+      lowerCase: function() {
+        return function(text, render) {
+          const str = render(text);
+          return str.toLowerCase();
+        };
+      },
+      openBrace: function() {
+        return function(text, render) {
+          return '{';
+        };
+      },
+      closeBrace: function() {
+        return function(text, render) {
+          return '}';
+        };
+      },
+      currentDate: function() {
+        return function(text, render) {
+          return new Date().toLocaleDateString('zh-CN');
+        };
+      },
+      currentTime: function() {
+        return function(text, render) {
+          return new Date().toLocaleString('zh-CN');
+        };
+      },
+      timestamp: function() {
+        return function(text, render) {
+          return Date.now().toString();
+        };
+      }
     };
     
     // 应用模板配置的默认值
